@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import AddProduct from "./addProduct";
 import DeleteProduct from "./deleteProduct";
+import UpateProduct from "./updateProduct";
 
 const prisma = new PrismaClient();
 
@@ -9,6 +10,7 @@ const getProducts = async () => {
         select : {
             id:true,
             title:true,
+            price:true,
             brandId: true,
             brand: true
         }
@@ -48,7 +50,8 @@ const getBrands = async () => {
                     <td>{product.title}</td>
                     <td>{product.price}</td>
                     <td>{product.brand.name}</td>
-                    <td>
+                    <td className="flex justify-center space-x-1">
+                        <UpateProduct product={product} brands={brands}/>
                         <DeleteProduct product={product}/>
                     </td>
                 </tr>
